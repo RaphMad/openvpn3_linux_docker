@@ -1,2 +1,4 @@
 kind: template
 load: docker_build_and_push.yaml
+data:
+  ignore_grype: true
