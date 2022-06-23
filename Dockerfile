@@ -56,6 +56,7 @@ COPY --from=builder /openvpn3-linux/src/policy/*.conf /usr/share/dbus-1/system.d
 
 COPY . /
 
-RUN mkdir -p /tmp/lib/openvpn3/configs/
+RUN addgroup openvpn && \
+    adduser -D openvpn -G openvpn
 
 ENTRYPOINT ["/entrypoint.sh"]
