@@ -3,5 +3,5 @@
 addgroup -g $PGID openvpn
 adduser -S -D openvpn -u $PUID -G openvpn
 
-(su openvpn; sleep 10; openvpn3 session-start --dco true --config /netherlands.ovpn) &
+(su openvpn; sleep 10; openvpn3 session-start --dco true --config /netherlands.ovpn &)
 exec /usr/bin/dbus-daemon --nofork --nopidfile --system
