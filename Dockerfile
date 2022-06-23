@@ -33,7 +33,7 @@ RUN cd openvpn3-linux &&  \
 
 FROM alpine
 
-RUN apk add --no-cache dbus glib iptables jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
+RUN apk add --no-cache dbus glib iptables ip6tables jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
 
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3 /usr/local/bin/openvpn3
 
