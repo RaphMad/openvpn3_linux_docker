@@ -17,7 +17,7 @@ ip46tables -A OUTPUT -o $VPN_IF -j ACCEPT
 # Allow only VPN traffic (udp port 1194) on the actual interface.
 ip46tables -A OUTPUT -o $DOCKER_IF -p udp --dport 1194 -j ACCEPT
 
-# Allow DNS (udp port 53) on all interfaces (docker provides a local DNS on the loopback interface).
+# Allow DNS (tcp/udp port 53) on all interfaces (docker provides a local DNS on the loopback interface).
 ip46tables -A OUTPUT -p udp --dport 53 -j ACCEPT
 ip46tables -A OUTPUT -p tcp --dport 53 -j ACCEPT
 
