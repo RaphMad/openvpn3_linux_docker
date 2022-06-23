@@ -25,7 +25,7 @@ ip46tables -A OUTPUT -o $DOCKER_IF -p tcp --dport 53 -j ACCEPT
 ip46tables -A OUTPUT -o lo -j ACCEPT
 
 # Allow established/related traffic.
-ip46tables -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+ip46tables -A OUTPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
 (su openvpn && sleep 10 && openvpn3 session-start --dco ${ENABLE_DCO:-false} --config $VPN_CONFIG &)
 exec /usr/bin/dbus-daemon --nofork --nopidfile --system
