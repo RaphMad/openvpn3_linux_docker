@@ -58,4 +58,8 @@ COPY . /
 RUN addgroup openvpn && \
     adduser -D openvpn -G openvpn
 
+HEALTHCHECK --interval=60s \
+            --timeout=15s \
+            --start-period=120s \
+            CMD wget --quiet --tries=1 --spider https://api.ipify.org || exit 1
 ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
