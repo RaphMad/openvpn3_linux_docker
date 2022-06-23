@@ -61,5 +61,5 @@ RUN addgroup openvpn && \
 HEALTHCHECK --interval=60s \
             --timeout=15s \
             --start-period=120s \
-            CMD curl -LSs https://api.ipify.org || exit 1
+            CMD test $(curl -LSs https://api.ipify.org) = $VPN_EXTERNAL_IP || exit 1
 ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
