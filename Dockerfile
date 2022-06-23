@@ -30,7 +30,6 @@ RUN cd openvpn3-linux &&  \
                 --localstatedir=/tmp/ && \
     make
 
-RUN find -name configs
 
 FROM alpine
 
