@@ -33,7 +33,7 @@ RUN cd openvpn3-linux &&  \
 
 FROM alpine
 
-RUN apk add --no-cache dbus glib iptables ip6tables jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
+RUN apk add --no-cache curl dbus glib iptables ip6tables jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
 
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3 /usr/local/bin/openvpn3
 
@@ -61,5 +61,5 @@ RUN addgroup openvpn && \
 HEALTHCHECK --interval=60s \
             --timeout=15s \
             --start-period=120s \
-            CMD wget --quiet --tries=1 --spider https://api.ipify.org || exit 1
+            CMD curl -LSs https://api.ipify.org || exit 1
 ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
