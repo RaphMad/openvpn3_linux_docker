@@ -34,7 +34,7 @@ RUN find -name configs
 
 FROM alpine
 
-RUN apk add --no-cache dbus glib jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tinyxml2
+RUN apk add --no-cache dbus glib jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
 
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3-admin /usr/local/sbin/openvpn3-admin
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3 /usr/local/bin/openvpn3
@@ -59,4 +59,4 @@ COPY . /
 
 RUN mkdir -p /tmp/lib/openvpn3/configs/
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["tini", "/entrypoint.sh"]
