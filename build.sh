@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build --pull -t registry.traefik.lan/raphmad/openvpn3_linux - < Dockerfile
+docker build --pull -f Dockerfile -t registry.traefik.lan/raphmad/openvpn3_linux container_files/
