@@ -58,4 +58,4 @@ COPY . /
 RUN addgroup openvpn && \
     adduser -D openvpn -G openvpn
 
-ENTRYPOINT ["/usr/bin/tini", "/entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
