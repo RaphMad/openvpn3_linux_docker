@@ -35,7 +35,6 @@ FROM alpine
 
 RUN apk add --no-cache dbus glib jsoncpp libcap-ng libnl3 libuuid lz4-dev protobuf tini tinyxml2
 
-COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3-admin /usr/local/sbin/openvpn3-admin
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3 /usr/local/bin/openvpn3
 
 COPY --from=builder /openvpn3-linux/src/configmgr/openvpn3-service-configmgr \
