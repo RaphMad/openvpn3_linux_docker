@@ -1,8 +1,15 @@
 #!/bin/sh
 
-ip46tables () {
+ip46tables() {
     iptables $@
     ip6tables $@
+}
+
+to_hex() {
+    IFS=.
+    for i in ${1}; do
+        echo -n "|${#i}|$i"
+    done
 }
 
 DOCKER_IF=eth0
@@ -18,8 +25,8 @@ ip46tables -A OUTPUT -o $VPN_IF -j ACCEPT
 ip46tables -A OUTPUT -o $DOCKER_IF -p udp --dport 1194 -j ACCEPT
 
 # Allow DNS (tcp/udp port 53) on the docker interface for looking up VPN endpoints DNS name.
-ip46tables -A OUTPUT -o $DOCKER_IF -p udp --dport 53 -m string --hex-string $VPN_HOST --algo bm -j ACCEPT
-ip46tables -A OUTPUT -o $DOCKER_IF -p tcp --dport 53 -m string --hex-string $VPN_HOST --algo bm -j ACCEPT
+ip46tables -A OUTPUT -o $DOCKER_IF -p udp --dport 53 -m string --hex-string $(to_hex $VPN_HOST) --algo bm -j ACCEPT
+ip46tables -A OUTPUT -o $DOCKER_IF -p tcp --dport 53 -m string --hex-string $(to_hex $VPN_HOST) --algo bm -j ACCEPT
 
 # Allow loopback communication.
 ip46tables -A OUTPUT -o lo -j ACCEPT
