@@ -9,7 +9,7 @@ to_dns_hex() {
     IFS=.
     for i in ${1}; do
         # See https://stackoverflow.com/a/17184231/3324111
-        echo -n "|${#i}|$i"
+        printf '|%02x|%s' ${#i} $i
     done
 }
 
