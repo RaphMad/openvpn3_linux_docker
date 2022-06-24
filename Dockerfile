@@ -53,6 +53,9 @@ COPY --from=builder /openvpn3-linux/src/netcfg/openvpn3-service-netcfg \
 COPY --from=builder /openvpn3-linux/src/service-autostart/*.service /usr/share/dbus-1/system-services/
 COPY --from=builder /openvpn3-linux/src/policy/*.conf /usr/share/dbus-1/system.d/
 
+RUN sed -i 's&--log-level 4&--log-level 6&' /usr/share/dbus-1/system-services/net.openvpn.v3.log.service
+RUN sed -i 's&--syslog&--log-file /proc/1/fd/0&' /usr/share/dbus-1/system-services/net.openvpn.v3.log.service
+
 COPY . /
 
 RUN addgroup openvpn && \
