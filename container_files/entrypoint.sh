@@ -11,6 +11,7 @@ to_dns_hex() {
         # See https://stackoverflow.com/a/17184231/3324111
         printf '|%02x|%s' ${#i} $i
     done
+    unset IFS
 }
 
 VPN_IF=tun0
