@@ -63,7 +63,7 @@ services:
     image: raphmad/openvpn3_linux
     container_name: openvpn
     restart: unless-stopped
-    # It is a good practice to make containers read-only whereever possible and mount a tmpfs for locations that need writing during runtime.
+    # It is a good practice to make containers read-only whenever possible and mount a tmpfs only for locations that need writing during runtime.
     read_only: true
     tmpfs:
       - /run/
