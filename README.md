@@ -1,4 +1,4 @@
-# openvpn3_linux
+# openvpn3_linux_docker
 
 This is a containerized version of [https://github.com/OpenVPN/openvpn3-linux](openvpn3-linux).
 
