@@ -7,7 +7,7 @@ In addition, a "killswitch"-type set of firewall rules prevent any outgoing traf
 
 Configuration can be provided via environment variables, but the defaults should be sensible for most common VPN configuration files.
 
-The only required part is the configuration file itself, which is expected to be mounted under `/config.ovpn` as well as the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
+The only required part is the ovpn file itself, which is expected to be mounted under `/config.ovpn` as well as the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
 
 ## Environment variables
 
