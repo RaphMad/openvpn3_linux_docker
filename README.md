@@ -29,7 +29,7 @@ The only required part is the configuration file, which by default is expected t
 
 ## Minimal `docker-compose.yml`
 
-```
+```yaml
 version: '3.9'
 
 services:
