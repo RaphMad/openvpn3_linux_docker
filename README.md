@@ -5,8 +5,9 @@ This is a containerized version of [openvpn3-linux](https://github.com/OpenVPN/o
 It can be used to provide VPN access to other containers (see example compose file below).
 In addition, a "killswitch"-type set of firewall rules prevent any outgoing traffic from not traversing the VPN tunnel.
 
-Note that this container aims to be as simple as possible - configuration can be provided via environment variables, but the defaults should be sensible for most common VPN configuration files.
-The only required part is the configuration file itself, which by default is expected to be mounted under `/config.ovpn` and the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
+Configuration can be provided via environment variables, but the defaults should be sensible for most common VPN configuration files.
+
+The only required part is the configuration file itself, which is expected to be mounted under `/config.ovpn` as well as the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
 
 ## Environment variables
 
