@@ -72,9 +72,14 @@ COPY . /
 
 RUN addgroup openvpn && \
     adduser -D openvpn -G openvpn
+RUN mkdir -p /tmp/lib/openvpn3/configs
 
 HEALTHCHECK --interval=60s \
             --timeout=15s \
             --start-period=120s \
-            CMD test $(curl -LSs https://api.ipify.org) = $VPN_EXTERNAL_IP || exit 1
+            CMD if [ -n "$VPN_EXTERNAL_IP" ]; then \
+                  test $(curl -LSs https://api.ipify.org) = $VPN_EXTERNAL_IP; \
+                else \
+                  curl -LSs https://api.ipify.org; \
+                fi || exit 1
 ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
