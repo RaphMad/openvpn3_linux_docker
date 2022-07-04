@@ -1,12 +1,12 @@
-# openvpn3_linux_docker
+# [openvpn3_linux_docker](https://github.com/RaphMad/openvpn3_linux_docker)
 
-This is a containerized version of [https://github.com/OpenVPN/openvpn3-linux](openvpn3-linux).
+This is a containerized version of [openvpn3-linux](https://github.com/OpenVPN/openvpn3-linux)
 
 It can be used to provide VPN access to other containers (see example compose file below).
 In addition, a "killswitch"-type set of firewall rules prevent any outgoing traffic from not traversing the VPN tunnel.
 
 Note that this container aims to be as simple as possible - configuration can be provided via environment variables, but the defaults should be sensible for most common VPN configuration files.
-The only required part is the configuration file, which by default is expected to be mounted under `/config.ovpn` and the env var `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
+The only required part is the configuration file itself, which by default is expected to be mounted under `/config.ovpn` and the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
 
 ## Environment variables
 
@@ -79,7 +79,7 @@ services:
       - 1.1.1.1
     environment:
       VPN_HOST: <some.host>
-      # Setting the _expecected_ external IP will verify it in the healthcheck of the VPN container.
+      # Setting the _expected_ external IP will verify it in the healthcheck of the VPN container.
       VPN_EXTERNAL_IP: <1.2.3.4>
       # This is an experimental feature, but feel free to use it if your kernel has support for it.
       ENABLE_DCO: 'true'
