@@ -1,6 +1,6 @@
 # [openvpn3_linux_docker](https://github.com/RaphMad/openvpn3_linux_docker)
 
-This is a containerized version of [openvpn3-linux](https://github.com/OpenVPN/openvpn3-linux)
+This is a containerized version of the __VPN client__ [openvpn3-linux](https://github.com/OpenVPN/openvpn3-linux).
 
 It can be used to provide VPN access to other containers (see example compose file below).
 In addition, a "killswitch"-type set of firewall rules prevent any outgoing traffic from not traversing the VPN tunnel.
@@ -9,22 +9,23 @@ Configuration can be provided via environment variables, but the defaults should
 
 The only required part is the ovpn file itself, which is expected to be mounted under `/config.ovpn` as well as the environment variable `VPN_HOST`, which will be used to generate a firewall exclusion for the initial DNS lookup of your VPN server.
 
+
 ## Environment variables
 
-| Name                   | Description                                                                                                                                 |
-| :----:                 | :----: |
-| `VPN_HOST`             | Hostname of the VPN endpoint (server) to connect to. Required if your configuration specifies the host by name and firewall rules are used. |
-| `ENABLE_DCO`           | Set to true to enable DCO if your kernel supports it. Optional |
-| `VPN_EXTERNAL_IP`      | If your VPN provides a static external IP, you can set it via this variable to regularly verify your external IP in the healthcheck. Optional |
-| `DISABLE_FIREWALL`     | Set to true to disable the creation of firewall rules. Optional (Firewall rules are enabled by default) |
-| `VPN_PROTO`            | Modify if your VPN configuration uses `tcp` instead of `udp`. Optional (Default `udp`) |
-| `VPN_PORT`             | Modify if your VPN configuration uses a port different from the default `1194`. Optional (Default `1194`) |
+| Name                   | Required             | Description                                                                                                                                     |
+|:----------------------:|:--------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------:|
+| `VPN_HOST`             | Conditionally        | DNS-Hostname of the VPN endpoint (server) to connect to. Required if your configuration specifies the host by name and firewall rules are used. |
+| `VPN_EXTERNAL_IP`      | Conditionally        | If your VPN provides a static external IP, you can set this variable to regularly verify your external IP in the healthcheck.                   |
+| `ENABLE_DCO`           | No (Default `false`) | Set to true to enable DCO if your kernel supports it.                                                                                           |
+| `DISABLE_FIREWALL`     | No (Default `false`) | Set to true to disable the creation of firewall rules.                                                                                          |
+| `VPN_PROTO`            | No (Default `udp`)   | Modify if your VPN configuration uses `tcp` instead of `udp`.                                                                                   |
+| `VPN_PORT`             | No (Default `1194`)  | Modify if your VPN configuration uses a port different from the default `1194`.                                                                 |
 
 
 ## Expected bind mounts
 
-| Name                   | Description                                                                                                                                 |
-| :----:                 | :----: |
+| Name                   | Description                 |
+|:----------------------:|:---------------------------:|
 | `/config.ovpn`         | OpenVPN configuration file. |
 
 
@@ -53,6 +54,7 @@ services:
     depends_on:
       - openvpn
 ```
+
 
 ## Extended / annotated `docker-compose.yml`
 
