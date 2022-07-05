@@ -56,5 +56,12 @@ if [ -z $DISABLE_FIREWALL ]; then
     fi
 fi
 
+_term() {
+  echo "Caught SIGTERM signal!"
+  openvpn3 session-manage --disconnect --config ${VPN_CONFIG:-/config.ovpn}
+}
+
+trap _term SIGTERM
+
 (su openvpn && sleep 10 && openvpn3 session-start --dco ${ENABLE_DCO:-false} --config ${VPN_CONFIG:-/config.ovpn} &)
 exec /usr/bin/dbus-daemon --nofork --nopidfile --system
