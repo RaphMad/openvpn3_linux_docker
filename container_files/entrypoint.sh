@@ -52,7 +52,8 @@ if [ -z $DISABLE_FIREWALL ]; then
                 --dport 53 \
                 -m string \
                 --hex-string $(to_dns_hex $VPN_HOST) \
-                --algo bm -j ACCEPT
+                --algo bm \
+                -j ACCEPT
     fi
 fi
 
@@ -63,7 +64,7 @@ _term() {
 
 trap _term SIGTERM
 
-/usr/bin/dbus-daemon --nopidfile --system
-openvpn3 session-start --dco ${ENABLE_DCO:-false} --config ${VPN_CONFIG:-/config.ovpn} &
+(su openvpn && sleep 10 && openvpn3 session-start --dco ${ENABLE_DCO:-false} --config ${VPN_CONFIG:-/config.ovpn} &)
+/usr/bin/dbus-daemon --nofork --nopidfile --system &
 
 wait
