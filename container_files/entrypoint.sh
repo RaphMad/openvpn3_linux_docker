@@ -64,6 +64,6 @@ _term() {
 trap _term SIGTERM
 
 /usr/bin/dbus-daemon --nopidfile --system
-openvpn3 session-start --dco ${ENABLE_DCO:-false} --config ${VPN_CONFIG:-/config.ovpn}
+openvpn3 session-start --dco ${ENABLE_DCO:-false} --config ${VPN_CONFIG:-/config.ovpn} &
 
 wait
