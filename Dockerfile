@@ -44,7 +44,6 @@ RUN apk add --no-cache curl \
                        libuuid \
                        lz4-dev \
                        protobuf \
-                       tini \
                        tinyxml2
 
 COPY --from=builder /openvpn3-linux/src/ovpn3cli/openvpn3 /usr/local/bin/openvpn3
@@ -82,4 +81,4 @@ HEALTHCHECK --interval=60s \
                 else \
                   curl -LSs https://api.ipify.org; \
                 fi || exit 1
-ENTRYPOINT ["/sbin/tini", "/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
